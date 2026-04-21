@@ -242,7 +242,7 @@ export const courses = [
 
 export const instructors = [
   {
-    name: "Hemen",
+    name: "Hemn",
     role_sv: "Huvudlärare · B · BE",
     role_en: "Head Instructor · B · BE",
     role_ar: "المدرب الرئيسي · B · BE",
@@ -250,7 +250,7 @@ export const instructors = [
     image: "https://images.unsplash.com/photo-1630406144797-821be1f35d75?w=800&q=90",
   },
   {
-    name: "Elli",
+    name: "Tommy",
     role_sv: "Trafiklärare · B · B96",
     role_en: "Driving Instructor · B · B96",
     role_ar: "مدربة قيادة · B · B96",
@@ -258,7 +258,7 @@ export const instructors = [
     image: "https://images.unsplash.com/photo-1667020854803-0305af085242?w=800&q=90",
   },
   {
-    name: "Maaroof",
+    name: "Razie",
     role_sv: "Trafiklärare · Manuell & Automat",
     role_en: "Instructor · Manual & Automatic",
     role_ar: "مدرب · يدوي وأوتوماتيك",
