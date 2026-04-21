@@ -12,19 +12,47 @@ const POSTER =
 export default function Hero({ onBook }) {
   const { t, lang } = useLang();
   const [videoReady, setVideoReady] = useState(false);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     const v = document.getElementById("hero-video");
     if (v) v.play().catch(() => {});
   }, []);
 
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        // only apply while hero is in viewport range
+        if (y < window.innerHeight * 1.2) {
+          setOffset(y);
+        }
+        raf = 0;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const bgTranslate = `translate3d(0, ${offset * 0.35}px, 0) scale(${1 + Math.min(offset, 600) * 0.0004})`;
+  const contentTranslate = `translate3d(0, ${offset * 0.12}px, 0)`;
+  const contentOpacity = Math.max(0, 1 - offset / 600);
+
   return (
     <section id="top" className="relative min-h-[100svh] w-full overflow-hidden bg-[var(--mts-ink)] text-white">
-      {/* Background video */}
-      <div className="absolute inset-0">
+      {/* Background video with parallax */}
+      <div
+        className="absolute inset-0 will-change-transform"
+        style={{ transform: bgTranslate }}
+      >
         <video
           id="hero-video"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ${
+          className={`absolute inset-0 w-full h-[115%] object-cover transition-opacity duration-[1500ms] ${
             videoReady ? "opacity-100" : "opacity-0"
           }`}
           src={VIDEO_SRC}
@@ -40,15 +68,18 @@ export default function Hero({ onBook }) {
         <img
           src={POSTER}
           alt=""
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ${
+          className={`absolute inset-0 w-full h-[115%] object-cover transition-opacity duration-[1500ms] ${
             videoReady ? "opacity-0" : "opacity-100"
           }`}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/50 to-black/85" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_30%,rgba(215,38,61,0.25),transparent_60%)]" />
       </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/50 to-black/85 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_30%,rgba(215,38,61,0.25),transparent_60%)] pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-36 pb-20 lg:pt-44 lg:pb-24 min-h-[100svh] flex flex-col justify-center">
+      <div
+        className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-36 pb-20 lg:pt-44 lg:pb-24 min-h-[100svh] flex flex-col justify-center will-change-transform"
+        style={{ transform: contentTranslate, opacity: contentOpacity }}
+      >
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-8 animate-[fadeIn_.9s_ease]">
           <span className="flex h-2 w-2 relative">
