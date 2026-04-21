@@ -6,7 +6,7 @@ import { packages } from "../../mock/mock";
 import useReveal from "../../hooks/useReveal";
 
 export default function Packages({ onBook }) {
-  const { t, lang } = useLang();
+  const { t, lang, pick } = useLang();
   return (
     <section id="packages" className="relative py-24 lg:py-32 bg-[var(--mts-cream)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -18,8 +18,9 @@ export default function Packages({ onBook }) {
               key={p.id}
               pkg={p}
               lang={lang}
+              pick={pick}
               index={i}
-              onBook={() => onBook({ type: "package", id: p.id, name: lang === "sv" ? p.name_sv : p.name_en, price: p.price })}
+              onBook={() => onBook({ type: "package", id: p.id, name: pick(p, "name"), price: p.price })}
               cta={t.packages.cta}
               popularLabel={t.packages.mostPopular}
               fromLabel={t.packages.from}
@@ -70,11 +71,11 @@ export function SectionHeader({ eyebrow, title, sub, center = false, invert = fa
   );
 }
 
-function PackageCard({ pkg, lang, index, onBook, cta, popularLabel, fromLabel }) {
+function PackageCard({ pkg, lang, pick, index, onBook, cta, popularLabel, fromLabel }) {
   const { ref, visible } = useReveal();
   const popular = pkg.popular;
-  const includes = lang === "sv" ? pkg.includes_sv : pkg.includes_en;
-  const name = lang === "sv" ? pkg.name_sv : pkg.name_en;
+  const includes = pick(pkg, "includes");
+  const name = pick(pkg, "name");
   return (
     <div
       ref={ref}
@@ -126,7 +127,7 @@ function PackageCard({ pkg, lang, index, onBook, cta, popularLabel, fromLabel })
               : "bg-[var(--mts-ink)] hover:bg-[var(--mts-red)] text-white"
           }`}
         >
-          {cta} <ArrowRight className="w-4 h-4 ml-2" />
+          {cta} <ArrowRight className="w-4 h-4 ml-2 rtl-flip" />
         </Button>
       </div>
     </div>

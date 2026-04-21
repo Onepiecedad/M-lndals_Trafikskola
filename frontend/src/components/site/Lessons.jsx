@@ -6,7 +6,7 @@ import useReveal from "../../hooks/useReveal";
 import { ArrowUpRight } from "lucide-react";
 
 export default function Lessons({ onBook }) {
-  const { t, lang } = useLang();
+  const { t, lang, pick } = useLang();
   const { ref, visible } = useReveal();
   return (
     <section id="lessons" className="relative py-24 lg:py-32 bg-white border-y border-[var(--mts-line)]">
@@ -32,6 +32,8 @@ export default function Lessons({ onBook }) {
                 <div className="font-display text-2xl leading-tight">
                   {lang === "sv"
                     ? "Moderna bilar. Erfarna lärare."
+                    : lang === "ar"
+                    ? "سيارات حديثة. مدربون ذوو خبرة."
                     : "Modern cars. Experienced instructors."}
                 </div>
               </div>
@@ -49,14 +51,14 @@ export default function Lessons({ onBook }) {
               {lessons.map((l, i) => (
                 <LessonRow
                   key={i}
-                  qty={lang === "sv" ? l.qty_sv : l.qty_en}
+                  qty={pick(l, "qty")}
                   dur={l.dur}
                   price={l.price}
                   onBook={() =>
                     onBook({
                       type: "lesson",
                       id: `lesson-${i}`,
-                      name: lang === "sv" ? l.qty_sv : l.qty_en,
+                      name: pick(l, "qty"),
                       price: l.price,
                     })
                   }
@@ -69,6 +71,8 @@ export default function Lessons({ onBook }) {
               *{" "}
               {lang === "sv"
                 ? "Priser i SEK. Lektioner, presentkort och paket är giltiga 2 år från betalningsdatum. Priser kan justeras efter 1 år."
+                : lang === "ar"
+                ? "الأسعار بالكرونة السويدية. الدروس والبطاقات والباقات صالحة لمدة عامين من تاريخ الدفع. قد تُعدَّل الأسعار بعد عام واحد."
                 : "Prices in SEK. Lessons, gift cards and packages are valid 2 years from date of payment. Prices may adjust after 1 year."}
             </div>
           </div>

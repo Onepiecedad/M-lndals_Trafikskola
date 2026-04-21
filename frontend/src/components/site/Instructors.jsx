@@ -5,7 +5,7 @@ import { SectionHeader } from "./Packages";
 import useReveal from "../../hooks/useReveal";
 
 export default function Instructors() {
-  const { t, lang } = useLang();
+  const { t, pick } = useLang();
   return (
     <section className="relative py-24 lg:py-32 bg-[var(--mts-ink)] text-white overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgba(215,38,61,0.18),transparent_55%)]" />
@@ -17,7 +17,7 @@ export default function Instructors() {
         />
         <div className="mt-14 grid md:grid-cols-3 gap-6">
           {instructors.map((p, i) => (
-            <Card key={i} p={p} i={i} lang={lang} yearsLabel={t.instructors.years} />
+            <Card key={i} p={p} i={i} pick={pick} yearsLabel={t.instructors.years} />
           ))}
         </div>
       </div>
@@ -25,7 +25,7 @@ export default function Instructors() {
   );
 }
 
-function Card({ p, i, lang, yearsLabel }) {
+function Card({ p, i, pick, yearsLabel }) {
   const { ref, visible } = useReveal();
   return (
     <div
@@ -43,7 +43,7 @@ function Card({ p, i, lang, yearsLabel }) {
       <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-[var(--mts-ink)] via-[var(--mts-ink)]/85 to-transparent">
         <div className="font-display text-[26px] leading-tight">{p.name}</div>
         <div className="text-[13px] uppercase tracking-[0.18em] text-white/60 mt-1">
-          {lang === "sv" ? p.role_sv : p.role_en}
+          {pick(p, "role")}
         </div>
         <div className="mt-3 text-[13px] text-[var(--mts-gold)]">
           {p.years}+ {yearsLabel}

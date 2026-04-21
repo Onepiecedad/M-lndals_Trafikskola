@@ -11,7 +11,7 @@ import {
 import useReveal from "../../hooks/useReveal";
 
 export default function FAQ() {
-  const { t, lang } = useLang();
+  const { t, pick } = useLang();
   const { ref, visible } = useReveal();
   return (
     <section className="relative py-24 lg:py-32 bg-white border-y border-[var(--mts-line)]">
@@ -26,10 +26,10 @@ export default function FAQ() {
                 className="border border-[var(--mts-line)] rounded-2xl bg-[var(--mts-cream)] px-6 data-[state=open]:bg-white data-[state=open]:border-[var(--mts-ink)]/30 transition-colors"
               >
                 <AccordionTrigger className="text-left py-5 text-[16px] font-semibold hover:no-underline">
-                  {lang === "sv" ? f.q_sv : f.q_en}
+                  {pick(f, "q")}
                 </AccordionTrigger>
                 <AccordionContent className="text-[15px] leading-relaxed text-[var(--mts-muted)] pb-6">
-                  {lang === "sv" ? f.a_sv : f.a_en}
+                  {pick(f, "a")}
                 </AccordionContent>
               </AccordionItem>
             ))}

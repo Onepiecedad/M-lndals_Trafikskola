@@ -6,7 +6,7 @@ import { Clock, ArrowRight } from "lucide-react";
 import useReveal from "../../hooks/useReveal";
 
 export default function Courses({ onBook }) {
-  const { t, lang } = useLang();
+  const { t, lang, pick } = useLang();
   return (
     <section id="courses" className="relative py-24 lg:py-32 bg-[var(--mts-cream)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -18,7 +18,7 @@ export default function Courses({ onBook }) {
               key={c.id}
               course={c}
               i={i}
-              lang={lang}
+              pick={pick}
               nowLabel={t.courses.now}
               wasLabel={t.courses.was}
               bookLabel={t.courses.book}
@@ -26,7 +26,7 @@ export default function Courses({ onBook }) {
                 onBook({
                   type: "course",
                   id: c.id,
-                  name: lang === "sv" ? c.name_sv : c.name_en,
+                  name: pick(c, "name"),
                   price: c.price,
                 })
               }
@@ -38,10 +38,10 @@ export default function Courses({ onBook }) {
   );
 }
 
-function CourseCard({ course, i, lang, nowLabel, wasLabel, bookLabel, onBook }) {
+function CourseCard({ course, i, pick, nowLabel, wasLabel, bookLabel, onBook }) {
   const { ref, visible } = useReveal();
-  const name = lang === "sv" ? course.name_sv : course.name_en;
-  const desc = lang === "sv" ? course.desc_sv : course.desc_en;
+  const name = pick(course, "name");
+  const desc = pick(course, "desc");
   return (
     <div
       ref={ref}
@@ -51,7 +51,7 @@ function CourseCard({ course, i, lang, nowLabel, wasLabel, bookLabel, onBook }) 
       <div className="flex items-start justify-between gap-4">
         <div className="font-display text-[26px] leading-tight pr-6">{name}</div>
         <div className="shrink-0 w-10 h-10 rounded-full bg-[var(--mts-ink)] text-white grid place-items-center transition-all duration-500 group-hover:bg-[var(--mts-red)] group-hover:rotate-[-12deg]">
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-4 h-4 rtl-flip" />
         </div>
       </div>
 

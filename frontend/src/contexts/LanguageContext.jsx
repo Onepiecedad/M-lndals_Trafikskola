@@ -221,7 +221,119 @@ const dict = {
       complete: "Fill in your details and we'll get back with a booking proposal.",
     },
   },
+  ar: {
+    nav: {
+      home: "الرئيسية",
+      packages: "الباقات",
+      lessons: "الدروس",
+      courses: "الدورات",
+      about: "من نحن",
+      contact: "اتصل بنا",
+      book: "احجز الآن",
+    },
+    hero: {
+      badge: "منذ 1935",
+      title1: "احصل على رخصة القيادة في",
+      title2: "مولندال",
+      title3: "مع 90 عاماً من الخبرة.",
+      sub: "يدوي وأوتوماتيك. سيارات حديثة. مدربون محترفون. دربنا ثلاثة أجيال من السائقين — والآن دورك.",
+      ctaPrimary: "احجز درساً",
+      ctaSecondary: "اطلع على الأسعار",
+      chip1: "B · B96 · BE",
+      chip2: "Risk 1 · Risk 2",
+      chip3: "دورة المشرف",
+    },
+    offers: {
+      title: "العروض الحالية",
+      sub: "أسعار مخفضة على الدورات الآن — احجز قبل نفاد المقاعد.",
+    },
+    packages: {
+      eyebrow: "باقات رخصة القيادة",
+      title: "اختر الباقة المناسبة لك",
+      sub: "حلول شاملة — من الدرس الأول حتى اختبار القيادة. البطاقات والباقات صالحة لمدة عامين.",
+      mostPopular: "الأكثر شعبية",
+      cta: "اختر الباقة",
+      from: "تبدأ من",
+    },
+    lessons: {
+      eyebrow: "دروس القيادة",
+      title: "دروس قيادة فردية",
+      sub: "كل درس 55 دقيقة. الجودة قبل الكمية — مدربونا يعلمونك كيف تقود، وليس فقط كيف تجتاز الاختبار.",
+      col1: "العدد",
+      col2: "المدة",
+      col3: "السعر",
+      book: "احجز",
+    },
+    courses: {
+      eyebrow: "دورات وإضافات",
+      title: "دورات المخاطر ودورة المشرف وأكثر",
+      sub: "كل الدورات الإلزامية لرخصتك — في مكان واحد.",
+      book: "سجلني",
+      now: "الآن",
+      was: "السعر الأصلي",
+    },
+    about: {
+      eyebrow: "قصتنا",
+      title: "جزء من مولندال منذ 1935.",
+      p1: "دربت مدرسة مولندال للقيادة السائقين على مدى أربعة أجيال. نجمع بين عقود من الخبرة وأساليب التدريس الحديثة وأحدث جيل من السيارات.",
+      p2: "فلسفتنا بسيطة: لا ينبغي أن تجتاز الاختبار فحسب — بل أن تصبح سائقاً آمناً وواعياً وواثقاً مدى الحياة.",
+      feature1t: "سيارات حديثة",
+      feature1d: "سيارات يدوية وأوتوماتيكية مع أحدث أنظمة السلامة.",
+      feature2t: "جدولة مرنة",
+      feature2d: "احجز الدروس في الوقت الذي يناسبك — صباحاً أو مساءً أو في عطلة نهاية الأسبوع.",
+      feature3t: "تعليم بدون توتر",
+      feature3d: "مدربون صبورون يكيفون الإيقاع حسب احتياجاتك.",
+    },
+    instructors: {
+      eyebrow: "مدربونا",
+      title: "تعرّف على الفريق الذي سيأخذك حتى النهاية",
+      years: "عاماً من الخبرة",
+    },
+    testimonials: {
+      eyebrow: "طلابنا",
+      title: "آلاف حصلوا على رخصهم معنا",
+    },
+    faq: {
+      eyebrow: "الأسئلة الشائعة",
+      title: "كل ما تحتاج معرفته",
+    },
+    contact: {
+      eyebrow: "اتصل بنا",
+      title: "احجز درسك الأول اليوم",
+      sub: "اتصل أو راسلنا أو أرسل طلباً أدناه — سنعاود الاتصال بك خلال 24 ساعة.",
+      hours: "ساعات العمل",
+      address: "العنوان",
+      phone: "الهاتف",
+      email: "البريد الإلكتروني",
+      payment: "الدفع",
+      swish: "Swish",
+      bankgiro: "Bankgiro",
+      formTitle: "أرسل طلبك",
+      name: "الاسم الكامل",
+      phoneF: "رقم الهاتف",
+      emailF: "البريد الإلكتروني",
+      package: "ما الذي تهتم به؟",
+      message: "رسالة (اختياري)",
+      submit: "أرسل الطلب",
+      success: "شكراً! سنتواصل معك خلال 24 ساعة.",
+      selectPlaceholder: "اختر باقة أو دورة",
+    },
+    footer: {
+      rights: "جميع الحقوق محفوظة.",
+      tagline: "نُدرّب السائقين منذ 1935.",
+      quick: "روابط سريعة",
+      followUs: "تابعنا",
+    },
+    booking: {
+      title: "احجز",
+      pick: "تم اختيار",
+      complete: "املأ بياناتك وسنعاود الاتصال بك بمقترح حجز.",
+    },
+  },
 };
+
+const RTL_LANGS = ["ar"];
+const ORDER = ["sv", "en", "ar"];
 
 export function LanguageProvider({ children }) {
   const [lang, setLang] = useState(() => {
@@ -236,14 +348,21 @@ export function LanguageProvider({ children }) {
     try {
       localStorage.setItem("mts_lang", lang);
       document.documentElement.lang = lang;
+      document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
     } catch {}
   }, [lang]);
 
-  const toggle = () => setLang((l) => (l === "sv" ? "en" : "sv"));
+  const toggle = () => setLang((l) => ORDER[(ORDER.indexOf(l) + 1) % ORDER.length]);
   const t = dict[lang];
+  const isRTL = RTL_LANGS.includes(lang);
+  // Pick localized field from an object, e.g. pick(pkg, "name") -> pkg.name_ar|name_en|name_sv
+  const pick = (obj, base) => {
+    if (!obj) return "";
+    return obj[`${base}_${lang}`] ?? obj[`${base}_en`] ?? obj[`${base}_sv`] ?? "";
+  };
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, toggle, t }}>
+    <LanguageContext.Provider value={{ lang, setLang, toggle, t, isRTL, pick }}>
       {children}
     </LanguageContext.Provider>
   );

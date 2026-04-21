@@ -22,7 +22,7 @@ import { toast } from "sonner";
 import { Check } from "lucide-react";
 
 export default function BookingDialog({ open, item, onClose }) {
-  const { t, lang } = useLang();
+  const { t, lang, pick } = useLang();
   const [form, setForm] = useState({ name: "", phone: "", email: "", pref: "", message: "", choice: "" });
 
   useEffect(() => {
@@ -35,15 +35,21 @@ export default function BookingDialog({ open, item, onClose }) {
   }, [open, item]);
 
   const options = [
-    ...pkgs.map((p) => ({ id: p.id, label: (lang === "sv" ? p.name_sv : p.name_en) + ` — ${p.price} kr` })),
-    ...lsn.map((l, i) => ({ id: `lesson-${i}`, label: (lang === "sv" ? l.qty_sv : l.qty_en) + ` — ${l.price} kr` })),
-    ...crs.map((c) => ({ id: c.id, label: (lang === "sv" ? c.name_sv : c.name_en) + ` — ${c.price} kr` })),
+    ...pkgs.map((p) => ({ id: p.id, label: pick(p, "name") + ` — ${p.price} kr` })),
+    ...lsn.map((l, i) => ({ id: `lesson-${i}`, label: pick(l, "qty") + ` — ${l.price} kr` })),
+    ...crs.map((c) => ({ id: c.id, label: pick(c, "name") + ` — ${c.price} kr` })),
   ];
 
   const submit = (e) => {
     e.preventDefault();
     if (!form.name || !form.phone || !form.email) {
-      toast.error(lang === "sv" ? "Fyll i namn, telefon och e-post." : "Please fill name, phone and email.");
+      toast.error(
+        lang === "sv"
+          ? "Fyll i namn, telefon och e-post."
+          : lang === "ar"
+          ? "يرجى إدخال الاسم والهاتف والبريد الإلكتروني."
+          : "Please fill name, phone and email."
+      );
       return;
     }
     const submission = { ...form, item, createdAt: new Date().toISOString() };
@@ -54,6 +60,20 @@ export default function BookingDialog({ open, item, onClose }) {
     toast.success(t.contact.success);
     onClose();
   };
+
+  const prefPlaceholder =
+    lang === "sv"
+      ? "t.ex. vardagar efter 16"
+      : lang === "ar"
+      ? "مثلاً أيام الأسبوع بعد الساعة 16"
+      : "e.g. weekdays after 4pm";
+  const prefLabel = lang === "sv" ? "Önskad dag / tid" : lang === "ar" ? "اليوم / الوقت المفضل" : "Preferred day / time";
+  const fallbackTitle =
+    lang === "sv"
+      ? "Boka körlektion eller paket"
+      : lang === "ar"
+      ? "احجز درساً أو باقة"
+      : "Book a lesson or package";
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
@@ -66,9 +86,7 @@ export default function BookingDialog({ open, item, onClose }) {
             <DialogTitle className="font-display text-[30px] leading-tight tracking-tight">
               {item?.name
                 ? `${t.booking.pick}: ${item.name}`
-                : lang === "sv"
-                ? "Boka körlektion eller paket"
-                : "Book a lesson or package"}
+                : fallbackTitle}
             </DialogTitle>
             <DialogDescription className="text-white/70">
               {t.booking.complete}
@@ -120,12 +138,12 @@ export default function BookingDialog({ open, item, onClose }) {
             </Select>
           </Field>
 
-          <Field label={lang === "sv" ? "Önskad dag / tid" : "Preferred day / time"}>
+          <Field label={prefLabel}>
             <Input
               value={form.pref}
               onChange={(e) => setForm({ ...form, pref: e.target.value })}
               className="h-12 bg-white border-[var(--mts-line)] focus-visible:ring-[var(--mts-red)]"
-              placeholder={lang === "sv" ? "t.ex. vardagar efter 16" : "e.g. weekdays after 4pm"}
+              placeholder={prefPlaceholder}
             />
           </Field>
 

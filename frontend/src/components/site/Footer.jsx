@@ -4,7 +4,7 @@ import { contact } from "../../mock/mock";
 import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 
 export default function Footer() {
-  const { t, lang } = useLang();
+  const { t, pick } = useLang();
   const year = new Date().getFullYear();
   const links = [
     { href: "#packages", label: t.nav.packages },
@@ -26,14 +26,12 @@ export default function Footer() {
               <div>
                 <div className="font-display text-2xl tracking-tight">Mölndals Trafikskola</div>
                 <div className="text-[11px] uppercase tracking-[0.22em] text-white/60">
-                  {lang === "sv" ? contact.tagline_sv : contact.tagline_en}
+                  {pick(contact, "tagline")}
                 </div>
               </div>
             </div>
             <p className="text-[15px] text-white/70 leading-relaxed max-w-md">
-              {lang === "sv"
-                ? "Manuell & automat. Moderna bilar, professionella lärare och paket som tar dig hela vägen till körkortet."
-                : "Manual & automatic. Modern cars, professional instructors and packages that take you all the way to your license."}
+              {t.footer.tagline}
             </p>
 
             <div className="flex items-center gap-3 mt-7">

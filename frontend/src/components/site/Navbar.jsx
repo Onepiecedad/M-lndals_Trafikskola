@@ -78,7 +78,7 @@ export default function Navbar({ onBook }) {
             aria-label="Toggle language"
           >
             <Globe className="w-3.5 h-3.5" />
-            {lang === "sv" ? "SV" : "EN"}
+            {lang === "sv" ? "SV" : lang === "en" ? "EN" : "AR"}
           </button>
           <Button
             onClick={onBook}
@@ -123,7 +123,7 @@ export default function Navbar({ onBook }) {
                 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-[var(--mts-line)]"
               >
                 <Globe className="w-3.5 h-3.5" />
-                {lang === "sv" ? "SV" : "EN"}
+                {lang === "sv" ? "SV" : lang === "en" ? "EN" : "AR"}
               </button>
             </div>
             <Button

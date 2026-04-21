@@ -13,7 +13,7 @@ export default function Marquee() {
           <div key={i} className="flex items-center gap-4 px-8 shrink-0">
             <Sparkles className="w-4 h-4 text-[var(--mts-gold)]" />
             <span className="text-[13.5px] uppercase tracking-[0.22em] font-medium">
-              {lang === "sv" ? o.sv : o.en}
+              {o[lang] || o.en}
             </span>
             <span className="text-white/30">•</span>
           </div>

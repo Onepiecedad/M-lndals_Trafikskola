@@ -6,7 +6,7 @@ import useReveal from "../../hooks/useReveal";
 import { Star, Quote } from "lucide-react";
 
 export default function Testimonials() {
-  const { t, lang } = useLang();
+  const { t, pick } = useLang();
   return (
     <section className="relative py-24 lg:py-32 bg-[var(--mts-cream)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -14,7 +14,7 @@ export default function Testimonials() {
 
         <div className="mt-14 grid md:grid-cols-3 gap-5">
           {testimonials.map((tm, i) => (
-            <Card key={i} tm={tm} i={i} lang={lang} />
+            <Card key={i} tm={tm} i={i} pick={pick} />
           ))}
         </div>
       </div>
@@ -22,9 +22,9 @@ export default function Testimonials() {
   );
 }
 
-function Card({ tm, i, lang }) {
+function Card({ tm, i, pick }) {
   const { ref, visible } = useReveal();
-  const text = lang === "sv" ? tm.text_sv : tm.text_en;
+  const text = pick(tm, "text");
   return (
     <div
       ref={ref}

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
   --mts-red: #D7263D;
@@ -25,6 +25,23 @@ body {
   background: var(--mts-cream);
   color: var(--mts-ink);
 }
+
+/* Arabic / RTL typography */
+html[lang="ar"] body {
+  font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
+}
+html[lang="ar"] .font-serif,
+html[lang="ar"] .font-display {
+  font-family: 'Amiri', 'Instrument Serif', serif;
+  letter-spacing: 0;
+}
+
+/* RTL: flip directional icons without flipping whole layout */
+html[dir="rtl"] .rtl-flip { transform: scaleX(-1); }
+
+/* keep numbers LTR inside rtl text */
+html[dir="rtl"] .tabular,
+html[dir="rtl"] .ltr-nums { direction: ltr; unicode-bidi: embed; display: inline-block; }
 
 .font-serif { font-family: 'Instrument Serif', 'Times New Roman', serif; font-weight: 400; }
 .font-display { font-family: 'Instrument Serif', 'Times New Roman', serif; letter-spacing: -0.01em; }

@@ -17,7 +17,7 @@ import { toast } from "sonner";
 import useReveal from "../../hooks/useReveal";
 
 export default function Contact() {
-  const { t, lang } = useLang();
+  const { t, lang, pick } = useLang();
   const { ref, visible } = useReveal();
   const [form, setForm] = useState({
     name: "",
@@ -26,12 +26,18 @@ export default function Contact() {
     pkg: "",
     message: "",
   });
-  const hours = lang === "sv" ? contact.hours_sv : contact.hours_en;
+  const hours = pick(contact, "hours");
 
   const submit = (e) => {
     e.preventDefault();
     if (!form.name || !form.phone || !form.email) {
-      toast.error(lang === "sv" ? "Fyll i namn, telefon och e-post." : "Please fill name, phone and email.");
+      toast.error(
+        lang === "sv"
+          ? "Fyll i namn, telefon och e-post."
+          : lang === "ar"
+          ? "يرجى إدخال الاسم والهاتف والبريد الإلكتروني."
+          : "Please fill name, phone and email."
+      );
       return;
     }
     const submission = { ...form, createdAt: new Date().toISOString() };
@@ -44,8 +50,8 @@ export default function Contact() {
   };
 
   const pkgOptions = [
-    ...packages.map((p) => ({ id: p.id, label: lang === "sv" ? p.name_sv : p.name_en })),
-    ...courses.map((c) => ({ id: c.id, label: lang === "sv" ? c.name_sv : c.name_en })),
+    ...packages.map((p) => ({ id: p.id, label: pick(p, "name") })),
+    ...courses.map((c) => ({ id: c.id, label: pick(c, "name") })),
   ];
 
   return (

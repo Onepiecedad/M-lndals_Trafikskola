@@ -112,7 +112,7 @@ export default function Hero({ onBook }) {
             className="btn-shine rounded-full bg-[var(--mts-red)] hover:bg-[var(--mts-red-dark)] text-white h-14 px-8 text-[15px] font-semibold tracking-wide shadow-[0_20px_40px_-20px_rgba(215,38,61,0.9)]"
           >
             {t.hero.ctaPrimary}
-            <ArrowRight className="w-5 h-5 ml-2" />
+            <ArrowRight className="w-5 h-5 ml-2 rtl-flip" />
           </Button>
           <a
             href="#packages"
@@ -157,7 +157,7 @@ export default function Hero({ onBook }) {
             ))}
           </div>
           <div className="text-sm text-white/80">
-            <span className="font-semibold text-white">4.9</span> / 5 · 12 000+ {lang === "sv" ? "förare" : "drivers"}
+            <span className="font-semibold text-white">4.9</span> / 5 · 12 000+ {lang === "sv" ? "förare" : lang === "ar" ? "سائق" : "drivers"}
           </div>
         </div>
 
@@ -173,11 +173,11 @@ export default function Hero({ onBook }) {
 }
 
 function HeroStats() {
-  const { lang } = useLang();
+  const { pick } = useLang();
   return (
     <div className="mt-16 lg:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md">
       {stats.map((s, i) => (
-        <Stat key={i} value={s.value} label={lang === "sv" ? s.label_sv : s.label_en} />
+        <Stat key={i} value={s.value} label={pick(s, "label")} />
       ))}
     </div>
   );
