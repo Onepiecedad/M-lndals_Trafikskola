@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Menu, X, Phone, Globe } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { Button } from "../ui/button";
 import { useLang } from "../../contexts/LanguageContext";
 import { contact } from "../../mock/mock";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Navbar({ onBook }) {
-  const { t, lang, toggle } = useLang();
+  const { t } = useLang();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -68,18 +69,7 @@ export default function Navbar({ onBook }) {
             <Phone className="w-4 h-4" />
             {contact.phone}
           </a>
-          <button
-            onClick={toggle}
-            className={`flex items-center gap-1.5 text-[13px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border transition-colors ${
-              light
-                ? "border-white/30 text-white hover:border-white/70"
-                : "border-[var(--mts-line)] text-[var(--mts-ink)] hover:border-[var(--mts-ink)]"
-            }`}
-            aria-label="Toggle language"
-          >
-            <Globe className="w-3.5 h-3.5" />
-            {lang === "sv" ? "SV" : lang === "en" ? "EN" : "AR"}
-          </button>
+          <LanguageSwitcher variant={light ? "light" : "dark"} />
           <Button
             onClick={onBook}
             className={`btn-shine rounded-full px-6 h-11 font-semibold transition-colors ${
@@ -118,13 +108,7 @@ export default function Navbar({ onBook }) {
               <a href={contact.phoneHref} className="flex items-center gap-2 text-sm">
                 <Phone className="w-4 h-4" /> {contact.phone}
               </a>
-              <button
-                onClick={toggle}
-                className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full border border-[var(--mts-line)]"
-              >
-                <Globe className="w-3.5 h-3.5" />
-                {lang === "sv" ? "SV" : lang === "en" ? "EN" : "AR"}
-              </button>
+              <LanguageSwitcher variant="dark" />
             </div>
             <Button
               onClick={() => {

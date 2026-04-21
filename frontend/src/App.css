@@ -1,2 +1,14 @@
 /* App shell */
 .App { min-height: 100vh; }
+
+/* ElevenLabs ConvAI widget positioning - keep above the Emergent badge */
+elevenlabs-convai {
+  position: fixed;
+  bottom: 72px;
+  right: 16px;
+  z-index: 9998;
+}
+html[dir="rtl"] elevenlabs-convai {
+  right: auto;
+  left: 16px;
+}
