@@ -242,7 +242,7 @@ export const courses = [
 
 export const instructors = [
   {
-    name: "Anders Lindqvist",
+    name: "Hemen",
     role_sv: "Huvudlärare · B · BE",
     role_en: "Head Instructor · B · BE",
     role_ar: "المدرب الرئيسي · B · BE",
@@ -250,7 +250,7 @@ export const instructors = [
     image: "https://images.unsplash.com/photo-1630406144797-821be1f35d75?w=800&q=90",
   },
   {
-    name: "Sara Bergman",
+    name: "Elli",
     role_sv: "Trafiklärare · B · B96",
     role_en: "Driving Instructor · B · B96",
     role_ar: "مدربة قيادة · B · B96",
@@ -258,7 +258,7 @@ export const instructors = [
     image: "https://images.unsplash.com/photo-1667020854803-0305af085242?w=800&q=90",
   },
   {
-    name: "Mikael Ström",
+    name: "Maaroof",
     role_sv: "Trafiklärare · Manuell & Automat",
     role_en: "Instructor · Manual & Automatic",
     role_ar: "مدرب · يدوي وأوتوماتيك",
@@ -271,9 +271,9 @@ export const testimonials = [
   {
     name: "Emma Karlsson",
     city: "Mölndal",
-    text_sv: "Tog körkortet på första försöket tack vare Anders pedagogiska körning. Helt enkelt bäst i Göteborgsområdet.",
-    text_en: "Passed on my first try thanks to Anders' calm teaching. Simply the best in the Gothenburg area.",
-    text_ar: "اجتزت الاختبار من المحاولة الأولى بفضل تعليم أندرس الهادئ. ببساطة الأفضل في منطقة غوتنبرغ.",
+    text_sv: "Tog körkortet på första försöket tack vare Hemens pedagogiska körning. Helt enkelt bäst i Göteborgsområdet.",
+    text_en: "Passed on my first try thanks to Hemen's calm teaching. Simply the best in the Gothenburg area.",
+    text_ar: "اجتزت الاختبار من المحاولة الأولى بفضل تعليم هيمن الهادئ. ببساطة الأفضل في منطقة غوتنبرغ.",
     image: "https://images.unsplash.com/photo-1578041262130-633307b3bfd6?w=400&q=90",
     rating: 5,
   },
